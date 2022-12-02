@@ -12,15 +12,22 @@ def main(day: int):
     day_str = str(day)
     dir_path = "day" + day_str
     file_path = os.path.join(dir_path, "day" + day_str + ".py")
+    input_file_path = os.path.join(dir_path, "input.txt")
     if os.path.exists(dir_path):
         raise ValueError("Day already created")
     os.mkdir(dir_path)
+    with open(input_file_path, "w"):
+        pass
     with open(file_path, "w") as day_file:
         day_file.write(
             dedent(
                 """\
                 #!/usr/local/bin/python3.11
                 import click
+                import os
+
+                CURR_PATH = os.path.dirname(__file__)
+                INPUT_PATH = os.path.join(CURR_PATH, "input.txt")
 
 
                 def part1(debug_mode: bool, *args):
@@ -46,9 +53,9 @@ def main(day: int):
                 @click.pass_context
                 def main(ctx, part: int, debug: bool):
                     if part == 1:
-                        part1(debug, *ctx.args)
+                        print(part1(debug, *ctx.args))
                     elif part == 2:
-                        part2(debug, *ctx.args)
+                        print(part2(debug, *ctx.args))
                     else:
                         raise ValueError("Invalid part number")
 
