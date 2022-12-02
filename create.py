@@ -30,6 +30,13 @@ def main(day: int):
                 INPUT_PATH = os.path.join(CURR_PATH, "input.txt")
 
 
+                def helper():
+                    with open(INPUT_PATH, "r") as input_file:
+                        
+                        for line in input_file.readlines():
+                            line = line.strip()
+
+
                 def part1(debug_mode: bool, *args):
                     if debug_mode:
                         breakpoint()
